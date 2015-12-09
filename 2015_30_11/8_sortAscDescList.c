@@ -1,6 +1,8 @@
-#include <stdio.h>
-#include <conio.h>
-#include <malloc.h>
+#define _CRT_SECURE_NO_WARNINGS 
+#include <stdio.h> 
+#include <stdio.h> 
+#include <conio.h> 
+#include <malloc.h> 
 
 struct node {
 	int num;
@@ -42,25 +44,33 @@ arr={2}
 arr={1,2,4,5,7}
 res={1,2,4,5,7}
 */
-void  arrangeList(struct node *head);
+void arrangeList(struct node *head);
 void reverse(struct node** head);
 
 int main(){
-	int arr[] = { 2 };
-	int len = 1;
-	struct node* head = NULL;
-	for (int i = 0; i<len; i++)
-		add(&head, arr[i]);
-	arrangeList(head);
-	while (head != NULL){
-		printf("\n%d", head->num);
-		head = head->next;
+	int num, len;
+	printf("\nEnter length :");
+	scanf("%d", &len);
+	if (len > 0){
+		struct node* head = NULL;
+		for (int i = 0; i < len; i++){
+			printf("\nEnter node %d : ", i + 1);
+			scanf("%d", &num);
+			add(&head, num);
+		}
+		arrangeList(head);
+		while (head != NULL){
+			printf("\n%d", head->num);
+			head = head->next;
+		}
 	}
-	printf("\nEXIT");
+	else
+		printf("\nInvalid input");
 	_getch();
 	return 0;
 }
 
+//This function reverses the descending part and appends it to the ascending part
 void arrangeList(struct node *head){
 	if (head == NULL || head->next == NULL)
 		return;

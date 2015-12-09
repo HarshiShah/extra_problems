@@ -1,6 +1,7 @@
-#include <stdio.h>
-#include <conio.h>
-#include <malloc.h>
+#define _CRT_SECURE_NO_WARNINGS 
+#include <stdio.h> 
+#include <conio.h> 
+#include <malloc.h> 
 
 struct node {
 	int num;
@@ -30,39 +31,55 @@ void add(struct node **head, int num){
 }
 
 /*
-arr={1,2,3,15,10,4}
-res=1--2--3--4--10--15
+input=15->2->3->10->1->40
+res=1->2->3->10->15->40
 
-arr={5,3}
-res=3--5
+input=2->2->6->4->2
+res=2->2->2->4->6
 
+input=5->3
+res=3->5
+
+input=2->2->2->2->2
+res=2->2->2->2->2
 */
-void  sortList(struct node *head);
+void sortList(struct node *head);
 
 int main(){
-	int arr[] = { 15, 5, 7, 9, 4, 18, 20 };
-	int len = 7;
-	struct node* head = NULL;
-	for (int i = 0; i<len; i++)
-		add(&head, arr[i]);
-	sortList(head);
-	while (head != NULL){
-		printf("\n%d", head->num);
-		head = head->next;
+	int num, len;
+	printf("\nEnter length :");
+	scanf("%d", &len);
+	if (len > 0){
+		struct node* head = NULL;
+		for (int i = 0; i < len; i++){
+			printf("\nEnter node %d : ", i + 1);
+			scanf("%d", &num);
+			add(&head, num);
+		}
+		sortList(head);
+		printf("\nSorted list\n");
+		while (head != NULL){
+			printf("\n%d", head->num);
+			head = head->next;
+		}
 	}
+	else
+		printf("\nInvalid input");
 	_getch();
 	return 0;
 }
 
-void  sortList(struct node *head){
+void sortList(struct node *head){
 	struct node* first = head;
 	struct node* sec = head->next;
 	if (first == NULL || sec == NULL)
 		return;
 	if (sec->next != NULL){
-		while (first->num < first->next->num){
+		while (first->next!=NULL && first->num <= first->next->num){
 			first = first->next;
 		}
+		if (first->next == NULL)
+			return;
 		sec = first->next;
 		while (sec->num < sec->next->num){
 			sec = sec->next;
@@ -72,5 +89,5 @@ void  sortList(struct node *head){
 	int temp = first->num;
 	first->num = sec->num;
 	sec->num = temp;
-	return;
+    return;
 }

@@ -1,6 +1,7 @@
-#include <stdio.h>
-#include <conio.h>
-#include <malloc.h>
+#define _CRT_SECURE_NO_WARNINGS 
+#include <stdio.h> 
+#include <conio.h> 
+#include <malloc.h> 
 
 struct node {
 	int num;
@@ -40,19 +41,30 @@ n1=1 n2=1 n3=6
 res=6
 
 n1=3 n2=5 n3=0
-res=-1
+res=Invalid input
 */
 int compute(int n1, int n2, int n3);
-struct node*  merge(struct node *head1, struct node* head2);
+struct node* merge(struct node *head1, struct node* head2);
 
 int main(){
-	int res = compute(1, 1, 6);
-	printf("\n%d", res);
+	int n1, n2, n3;
+	printf("\nEnter value of n1");
+	scanf("%d", &n1);
+	printf("\nEnter value of n2");
+	scanf("%d", &n2);
+	printf("\nEnter value of n3");
+	scanf("%d", &n3);
+	if (n3 > 0 && n2>0 && n1>0){
+		int res = compute(n1, n2, n3);
+		printf("\nresult=%d", res);
+	}
+	else
+	printf("\nInvalid input");
 	_getch();
 	return 0;
 }
 
-struct node*  merge(struct node *head1, struct node* head2){
+struct node* merge(struct node *head1, struct node* head2){
 	if (head1 == NULL)
 		return head2;
 	if (head2 == NULL)
@@ -74,8 +86,6 @@ struct node*  merge(struct node *head1, struct node* head2){
 }
 
 int compute(int n1, int n2, int n3){
-	if (n3 < 1)
-		return -1;
 	if (n1%n2 == 0){
 		if (n2 < n1)
 			n1 = n2;
